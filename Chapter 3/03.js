@@ -17,6 +17,12 @@ $(document).ready(function () {
 
     $("#switcher h3").click(function(){
        $("#switcher button").toggleClass("hidden");
+    }).hover(function(){
+        // 鼠标进入时,促发事件
+        $(this).addClass("hover");
+    },function(){
+        // 鼠标离开时,促发事件
+        $(this).removeClass("hover");
     });
 
 });
