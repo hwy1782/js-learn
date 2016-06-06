@@ -22,16 +22,20 @@ $(document).ready(function () {
         $("#switcher").removeClass("hover");
     });
 
-    $("#switcher").click(function (event) {
-        if ($(event.target).is("button")) {
-            var bodyClass = event.target.id.split("-")[1];
-            $("body").removeClass().addClass(bodyClass);
-            $("#switcher button").removeClass();
-            $(event.target).addClass("selected"); // 此时不能使用this获取当前操作的DOM对象
-        }else{
-            $("#switcher button").toggle("hidden");
-        }
+    // 使用内置事件委托功能
+    $("#switcher").on("click","button",function(){
+        var bodyClass = event.target.id.split("-")[1];
+        $("body").removeClass().addClass(bodyClass);
+        $("#switcher button").removeClass();
+        $(this).addClass("selected");
     });
+
+    $("#switcher").click(function(event){
+        if(event.target == this) {
+            $("#switcher button").toggle("hidden");
+            //event.stopPropagation();
+        }
+    })
 
 
 });
