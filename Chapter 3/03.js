@@ -8,7 +8,7 @@
 $(document).ready(function () {
     $("#switcher-default").addClass("selected");
 
-    $("#switcher button").on("click", function () {
+    $("#switcher button").click(function () {
         var bodyClass = this.id.split("-")[1];
         //console.log(bodyClass);
         $("#switcher button").removeClass();
