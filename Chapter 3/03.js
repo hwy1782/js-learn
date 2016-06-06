@@ -8,11 +8,12 @@
 $(document).ready(function () {
     $("#switcher-default").addClass("selected");
 
-    $("#switcher button").click(function () {
+    $("#switcher button").click(function (event) {
         var bodyClass = this.id.split("-")[1];
         $("body").removeClass().addClass(bodyClass);
         $("#switcher button").removeClass();
         $(this).addClass("selected");
+        event.stopPropagation(); // 停止事件传播
     });
 
     //$("#switcher h3").click(function(){
@@ -25,10 +26,8 @@ $(document).ready(function () {
     //    $(this).removeClass("hover");
     //});
 
-    $("#switcher").click(function(event){
-        if (event.target == this){
-            $("#switcher button").toggleClass("hidden");
-        }
+    $("#switcher").click(function () {
+        $("#switcher button").toggleClass("hidden");
     });
 
 
