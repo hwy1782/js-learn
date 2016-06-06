@@ -36,24 +36,20 @@ $(document).ready(function () {
     //        $("#switcher button").toggleClass("hidden");
     //    }
     //});
-
     // 定义按钮点击事件
     var toggleSwitch = function (event) {
         if (!$(event.target).is("button")) {
             $("#switcher button").toggleClass("hidden");
         }
     };
-
     // 给样式转换器绑定按钮点击事件
     $("#switcher").on("click.collapse", toggleSwitch);
-
-    // narrow 和large 按钮被点击时,样式转换器不能被折叠
-    $("#switcher-large, #switcher-narrow").click(function () {
-        $("#switcher").off("click.collapse");
-    });
-
-    $("#switcher-default").on("click.collapse",function(){
-        console.log("biding default switcher");
-        $("#switcher").on("click.collapse", toggleSwitch);
+    // 用户任意单击时解除绑定,确定是default按钮时添加绑定
+    $("#switcher button").click(function () {
+        //console.log("button click remove biding");
+        $("#switcher").off("click", toggleSwitch);
+        if (this.id == "switcher-default") {
+            $("#switcher").on("click.collapse", toggleSwitch);
+        }
     });
 });
