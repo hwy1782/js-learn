@@ -6,23 +6,19 @@
 // See README.txt for more information.
 
 $(document).ready(function () {
-    $("#switcher-default")
-        .addClass("selected")
-        .on("click", function () {
-            $("body").removeClass().removeClass("narrow");
-        });
-
-    $("#switcher-large")
-        .on("click", function () {
-        $("body").removeClass().addClass("large");
-    });
-
-    $("#switcher-narrow").on("click", function () {
-        $("body").removeClass().addClass("narrow");
-    });
+    $("#switcher-default").addClass("selected");
 
     $("#switcher button").on("click",function(){
+        $("body").removeClass();
         $("#switcher button").removeClass("selected");
         $(this).addClass("selected");
     })
+
+    $("#switcher-large").on("click", function () {
+        $("body").addClass("large");
+    });
+
+    $("#switcher-narrow").on("click", function () {
+        $("body").addClass("narrow");
+    });
 });
