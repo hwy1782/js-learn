@@ -10,10 +10,13 @@ $(document).ready(function () {
 
     $("#switcher button").click(function () {
         var bodyClass = this.id.split("-")[1];
-        //console.log(bodyClass);
-        $("#switcher button").removeClass();
         $("body").removeClass().addClass(bodyClass);
+        $("#switcher button").removeClass();
         $(this).addClass("selected");
+    });
+
+    $("#switcher h3").click(function(){
+       $("#switcher button").toggleClass("hidden");
     });
 
 });
