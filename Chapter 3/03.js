@@ -12,7 +12,7 @@ $(document).ready(function () {
         $("body").removeClass();
         $("#switcher button").removeClass("selected");
         $(this).addClass("selected");
-    })
+    });
 
     $("#switcher-large").on("click", function () {
         $("body").addClass("large");
