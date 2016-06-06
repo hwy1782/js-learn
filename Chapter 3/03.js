@@ -16,26 +16,44 @@ $(document).ready(function () {
     //    event.stopPropagation(); // 停止事件传播
     //});
 
-    $("#switcher").hover(function(){
+    $("#switcher").hover(function () {
         $("#switcher").addClass("hover");
-    },function(){
+    }, function () {
         $("#switcher").removeClass("hover");
     });
 
     // 使用内置事件委托功能
-    $("#switcher").on("click","button",function(){
+    $("#switcher").on("click", "button", function () {
         var bodyClass = event.target.id.split("-")[1];
         $("body").removeClass().addClass(bodyClass);
         $("#switcher button").removeClass();
         $(this).addClass("selected");
     });
 
-    $("#switcher").click(function(event){
-        if(event.target == this) {
-            $("#switcher button").toggle("hidden");
-            //event.stopPropagation();
+    // 非button区域点击隐藏折叠样式转换器
+    //$("#switcher").click(function (event) {
+    //    if (!$(event.target).is("button")) {
+    //        $("#switcher button").toggleClass("hidden");
+    //    }
+    //});
+
+    // 定义按钮点击事件
+    var toggleSwitch = function (event) {
+        if (!$(event.target).is("button")) {
+            $("#switcher button").toggleClass("hidden");
         }
-    })
+    };
 
+    // 给样式转换器绑定按钮点击事件
+    $("#switcher").on("click.collapse", toggleSwitch);
 
+    // narrow 和large 按钮被点击时,样式转换器不能被折叠
+    $("#switcher-large, #switcher-narrow").click(function () {
+        $("#switcher").off("click.collapse");
+    });
+
+    $("#switcher-default").on("click.collapse",function(){
+        console.log("biding default switcher");
+        $("#switcher").on("click.collapse", toggleSwitch);
+    });
 });
