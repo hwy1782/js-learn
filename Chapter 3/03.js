@@ -8,17 +8,12 @@
 $(document).ready(function () {
     $("#switcher-default").addClass("selected");
 
-    $("#switcher button").on("click",function(){
-        $("body").removeClass();
-        $("#switcher button").removeClass("selected");
+    $("#switcher button").on("click", function () {
+        var bodyClass = this.id.split("-")[1];
+        //console.log(bodyClass);
+        $("#switcher button").removeClass();
+        $("body").removeClass().addClass(bodyClass);
         $(this).addClass("selected");
     });
 
-    $("#switcher-large").on("click", function () {
-        $("body").addClass("large");
-    });
-
-    $("#switcher-narrow").on("click", function () {
-        $("body").addClass("narrow");
-    });
 });
