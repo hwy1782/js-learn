@@ -9,24 +9,16 @@ $(document).ready(function () {
     $("#switcher-default")
         .addClass("selected")
         .on("click", function () {
-            $("body").removeClass("large").removeClass("narrow");
-            //$("#switcher button").removeClass();
-            //$(this).addClass("selected");
+            $("body").removeClass().removeClass("narrow");
         });
 
     $("#switcher-large")
         .on("click", function () {
-        $("body").removeClass("large")
-            .removeClass("narrow")
-            .addClass("large");
-        //$("#switcher button").removeClass("selected");
-        //$(this).addClass("selected");
+        $("body").removeClass().addClass("large");
     });
 
     $("#switcher-narrow").on("click", function () {
-        $("body").removeClass("large").removeClass("narrow").addClass("narrow");
-        //$("#switcher button").removeClass();
-        //$(this).addClass("selected");
+        $("body").removeClass().addClass("narrow");
     });
 
     $("#switcher button").on("click",function(){
