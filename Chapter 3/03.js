@@ -16,6 +16,11 @@ $(document).ready(function () {
     //    event.stopPropagation(); // 停止事件传播
     //});
 
+    $("#switcher").hover(function(){
+        $("#switcher").addClass("hover");
+    },function(){
+        $("#switcher").removeClass("hover");
+    });
 
     $("#switcher").click(function (event) {
         if ($(event.target).is("button")) {
@@ -23,7 +28,6 @@ $(document).ready(function () {
             $("body").removeClass().addClass(bodyClass);
             $("#switcher button").removeClass();
             $(event.target).addClass("selected"); // 此时不能使用this获取当前操作的DOM对象
-            event.stopPropagation();
         }else{
             $("#switcher button").toggle("hidden");
         }
