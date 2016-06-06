@@ -8,26 +8,25 @@
 $(document).ready(function () {
     $("#switcher-default").addClass("selected");
 
-    $("#switcher button").click(function (event) {
-        var bodyClass = this.id.split("-")[1];
-        $("body").removeClass().addClass(bodyClass);
-        $("#switcher button").removeClass();
-        $(this).addClass("selected");
-        event.stopPropagation(); // 停止事件传播
-    });
-
-    //$("#switcher h3").click(function(){
-    //    $("#switcher button").toggleClass("hidden");
-    //}).hover(function(){
-    //    // 鼠标进入时,促发事件
-    //    $(this).addClass("hover");
-    //},function(){
-    //    // 鼠标离开时,促发事件
-    //    $(this).removeClass("hover");
+    //$("#switcher button").click(function (event) {
+    //    var bodyClass = this.id.split("-")[1];
+    //    $("body").removeClass().addClass(bodyClass);
+    //    $("#switcher button").removeClass();
+    //    $(this).addClass("selected");
+    //    event.stopPropagation(); // 停止事件传播
     //});
 
-    $("#switcher").click(function () {
-        $("#switcher button").toggleClass("hidden");
+
+    $("#switcher").click(function (event) {
+        if ($(event.target).is("button")) {
+            var bodyClass = event.target.id.split("-")[1];
+            $("body").removeClass().addClass(bodyClass);
+            $("#switcher button").removeClass();
+            $(event.target).addClass("selected"); // 此时不能使用this获取当前操作的DOM对象
+            event.stopPropagation();
+        }else{
+            $("#switcher button").toggle("hidden");
+        }
     });
 
 
