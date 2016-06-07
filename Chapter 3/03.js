@@ -8,14 +8,6 @@
 $(document).ready(function () {
     $("#switcher-default").addClass("selected");
 
-    //$("#switcher button").click(function (event) {
-    //    var bodyClass = this.id.split("-")[1];
-    //    $("body").removeClass().addClass(bodyClass);
-    //    $("#switcher button").removeClass();
-    //    $(this).addClass("selected");
-    //    event.stopPropagation(); // 停止事件传播
-    //});
-
     $("#switcher").hover(function () {
         $("#switcher").addClass("hover");
     }, function () {
@@ -30,12 +22,6 @@ $(document).ready(function () {
         $(this).addClass("selected");
     });
 
-    // 非button区域点击隐藏折叠样式转换器
-    //$("#switcher").click(function (event) {
-    //    if (!$(event.target).is("button")) {
-    //        $("#switcher button").toggleClass("hidden");
-    //    }
-    //});
     // 定义按钮点击事件
     var toggleSwitch = function (event) {
         if (!$(event.target).is("button")) {
@@ -52,4 +38,11 @@ $(document).ready(function () {
             $("#switcher").on("click.collapse", toggleSwitch);
         }
     });
+
+    // 模仿用户操作,在文档加载完毕的时候,自动隐藏样式转换器.注意这段代码必须放在click事件定义之后,才能使用click事件
+    //$("#switcher").trigger("click");
+    // 使用不带参数的click方法也能够触发,自动隐藏转换器的效果
+    $("#switcher").click();
+
+
 });
