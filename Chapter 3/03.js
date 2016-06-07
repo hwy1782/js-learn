@@ -14,20 +14,21 @@ $(document).ready(function () {
         $("#switcher").removeClass("hover");
     });
 
-    // 使用内置事件委托功能
-    $("#switcher").on("click", "button", function () {
+    // 使用内置事件委托功能,修改页面样式
+    $("#switcher").on("click", "button", function (event) {
         var bodyClass = event.target.id.split("-")[1];
         $("body").removeClass().addClass(bodyClass);
         $("#switcher button").removeClass();
         $(this).addClass("selected");
     });
 
-    // 定义按钮点击事件
+    // 定义 隐藏样式转换器 方法
     var toggleSwitch = function (event) {
         if (!$(event.target).is("button")) {
             $("#switcher button").toggleClass("hidden");
         }
     };
+
     // 给样式转换器绑定按钮点击事件
     $("#switcher").on("click.collapse", toggleSwitch);
     // 用户任意单击时解除绑定,确定是default按钮时添加绑定
@@ -45,4 +46,19 @@ $(document).ready(function () {
     $("#switcher").click();
 
 
+    // 需要监听的键盘字符
+    var trigger = {
+        D: "default",
+        N: "narrow",
+        L: "large"
+    };
+
+    // 键盘点击事件
+    $(document).keyup(function (event) {
+        var key = String.fromCharCode(event.which);
+        if (key in trigger) {
+            $("#switcher-" + trigger[key]).click();
+            //$("#switcher-default").click();
+        }
+    });
 });
