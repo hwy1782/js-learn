@@ -61,4 +61,29 @@ $(document).ready(function () {
             //$("#switcher-default").click();
         }
     });
+
+    $("div.author").click(function () {
+        $(this).addClass("selected");
+        //$("div.author").addClass("selected");
+    });
+
+    $("h3.chapter-title").dblclick(function () {
+        $("body").addClass("hidden");
+    });
+
+    var bodyClassArray = ["default", "large", "narrow"];
+    var index = 0;
+
+    $(document).keyup(function (event) {
+        var keyCode = event.keyCode;
+        if (keyCode == 39) {
+            index++;
+            var i = index % 3;
+            $("body").removeClass().addClass(bodyClassArray[i]);
+        }
+    });
+
+    $(document).mousemove(function (event) {
+        console.log("mouse screenX is : " + event.screenX);
+    });
 });
