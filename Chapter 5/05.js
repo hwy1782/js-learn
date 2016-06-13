@@ -8,7 +8,9 @@
 $(document).ready(function () {
     $("div.chapter a[href*='wikipedia']").attr({
             rel: 'external',
-            title: "learn more at Wikipedia ",
+            title: function () {
+                return "learn more about " + $(this).text() + " at wikipedia";
+            },
             id: function (index, oldValue) { // 值回调:就是给参数传入一个函数,而不是一个具体的值
                 return "wikilink-" + index;
             }
