@@ -9,7 +9,15 @@ $(document).ready(function () {
     $("<a href='#top'>back to top</a>").insertAfter("div.chapter p");
     $("<a id='top'></a>").prependTo("body");
 
-    $("span.footnote").insertBefore("#footer").wrapAll("<ol id='notes'></ol>").wrap("<li></li>");
+    //$("span.footnote").insertBefore("#footer").wrapAll("<ol id='notes'></ol>").wrap("<li></li>");
+
+    var $note = $("<ol id='notes'></ol>").insertBefore("#footer");
+    // 利用.each()回调的参数。这个参数表示迭代的次 数,从0开始,每迭代一次就加1
+    $("span.footnote").each(function (index) {
+        //在回调函数中,this关键字指 向当前正在操作的DOM元素
+        $("<sup>" + (index + 1) + "</sup>").insertBefore(this);
+        $(this).appendTo($note).wrap("<li></li>");
+    });
 
     $("div.chapter a[href*='wikipedia']").attr({
             rel: 'external',
