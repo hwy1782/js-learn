@@ -12,5 +12,14 @@ $(document).ready(function () {
         $("#topics a.selected").removeClass("selected");
         // 在被点击的selected上添加样式
         $(this).addClass("selected");
+
+        // 获取当前点击的文本内容
+        var topic = $(this).text();
+        // 展示所有的新闻内容
+        $("#news tr").show();
+
+        if (topic != 'All') {
+            $("#news tr:has(td):not(:contains('" + topic + "'))").hide();
+        }
     });
 });
