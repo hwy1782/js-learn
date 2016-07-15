@@ -17,7 +17,11 @@ $(document).ready(function () {
         //在回调函数中,this关键字指 向当前正在操作的DOM元素
         //$("<sup>" + (index + 1) + "</sup>").insertBefore(this);
         //$(this).appendTo($note).wrap("<li></li>");
-        $(this).before(["<sup>",index+1,"</sup>"].join("")).appendTo($note).wrap("<li></li>");
+        //$(this).before(["<sup>", index + 1, "</sup>"].join("")).appendTo($note).wrap("<li></li>");
+        // <a href='xx'>xxx</a>
+        $(this).before(["<sup>", "<a href='#footnode-", index + 1,
+                "' id='context-", index + 1, "'>", index + 1, "</a>", "</sup>"].join(""))
+            .appendTo($note).wrap("<li id='footnode-" + (index + 1) + "'></li>");
     });
 
     $("div.chapter a[href*='wikipedia']").attr({
