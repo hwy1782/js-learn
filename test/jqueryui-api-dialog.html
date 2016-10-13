@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>对话框部件（Dialog Widget）演示</title>
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+</head>
+<body>
+
+<button id="opener">打开对话框</button>
+<div id="dialog" title="对话框标题">
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>学校</th>
+        </tr>
+        <tr>
+            <td>fdsf</td>
+            <td>20</td>
+            <td>fdsafdas</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    $("#dialog").dialog({autoOpen: false});
+    $("#opener").click(function () {
+        $("#dialog").dialog("open");
+    });
+</script>
+
+</body>
+</html>

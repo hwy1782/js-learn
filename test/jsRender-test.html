@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Load jQuery -->
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+    <!-- Load JsRender latest version, from www.jsviews.com: -->
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Provide container for rendered template output: -->
+<div id="result"></div>
+
+<!-- Declare a JsRender template, in a script block: -->
+<script id="myTmpl" type="text/x-jsrender">{{:name}}</script>
+
+
+<script id="carTmpl" type="text/x-jsrender">
+     <div class="btn-group">
+         <button type="button" class="btn btn-default btn-sm carCheckStatus">{{:desc}}</button>
+         <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown"><span class="caret"></span></button>
+         <ul class="dropdown-menu" role="menu">
+            {{for people}}
+                <li><a href="#" name="updateCheckStatus" value="{{:id}}">{{:name}}</a></li>
+            {{/for}}
+        </ul>
+    </div>
+
+</script>
+
+<script id="peopleTmpl" type="text/x-jsrender">
+  <ul>{{for people}}
+    <li>Name: {{:name}}</li>
+  {{/for}}</ul>
+
+
+
+</script>
+
+
+<script>
+    //    var tmpl = $.templates("#myTmpl"); // Get compiled template
+    //    var data = {name: "Jofdsaf"};           // Define data
+    //    var html = tmpl.render(data);      // Render template using data - as HTML string
+    //    $("#result").html(html);           // Insert HTML string into DOM
+
+    //    var userTmpl = $.templates("Name:{{:name}}<br/>");
+    //    var user = {name: "张三"};
+    //    var userHtml = userTmpl.render(user);
+    //    $("#result").html(userHtml);           // Insert HTML string into DOM
+
+    var data = {
+        "desc": "正常",
+        "people": [
+            {
+                "id": 1,
+                "name": "Jim"
+            },
+            {
+                "id": 2,
+                "name": "Pedro"
+            }
+        ]
+    };
+    var tmpl = $.templates("#carTmpl");
+    var html = tmpl.render(data);
+    $("#result").html(html);
+
+
+    //    var data = {people: [{name: "Jim"}, {name: "Pedro"}] };
+    //    var tmpl = $.templates("#peopleTmpl");
+    //    var html = tmpl.render(data);
+
+</script>
+</body>
+</html>

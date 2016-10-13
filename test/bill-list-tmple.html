@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Load jQuery -->
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+    <!-- Load JsRender latest version, from www.jsviews.com: -->
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../myJs/myJs.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Provide container for rendered template output: -->
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>运单号</th>
+        <th>项目名称</th>
+        <th>终端用户名</th>
+        <th>接单日期</th>
+        <th>结算单状态</th>
+        <th>运费金额</th>
+        <th>车牌号</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="billList"></tbody>
+</table>
+
+<script id="billTmpl" type="text/x-jsrender">
+<tr>
+    <td style='display:none' class='shipId'>{{:shipId}}</td>
+    <td class='billId'>{{:billId}}</td>
+    <td><a href='/console/ship/detail/{{:shipId}}'>{{:shipId}}</a></td>
+    <td name='planName'>{{:planName}}</td>
+    <td name='buyerName'>{{:buyerName}}</td>
+    <td>{{:~timeFormat(shipCreateTime)}}</td>
+    <!--<td>{{:shipCreateTime}} {{:shipCreateTime}}</td>-->
+    <td>{{:totalPrice}}</td>
+    <td>{{:plateNumber}}</td>
+    <td>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm billStatus">{{:billStatus}}</button>
+        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown"><span
+                class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#" class="updateCheckStatus" value="CANCELED">已取消</a></li>
+            <li><a href="#" class="updateCheckStatus" value="TO_BE_PAID">待支付</a></li>
+            <li><a href="#" class="updateCheckStatus" value="PAID">已支付</a></li>
+        </ul>
+    </div>
+    </td>
+    <td> <button  class='btn btn-default btn-sm billDetail'>详情</button></td>
+</tr>
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        init();
+    });
+
+    $(document).on("click", '.updateCheckStatus', function () {
+        var shipId = $(this).closest('tr').children('td.shipId').text();
+        var key = $(this).attr('value');
+        var value = $(this).text();
+        console.log("update: " + shipId + " check status to:" + key);
+//        console.log($(this).closest('div').children('button.billStatus').text());
+        $(this).closest('div').children('button.billStatus').text(value);
+    });
+
+    function init() {
+        var data = [
+            {
+                "billId": 48,
+                "planName": "真如",
+                "buyerName": "肖宗灿",
+                "shipCreateTime": 1476080699000,
+                "goodsArriveTime": 1476085314000,
+                "shipId": "2016101014245948211",
+                "totalPrice": 30,
+                "plateNumber": "浙A",
+                "billStatus": "待支付"
+            },
+            {
+                "billId": 46,
+                "planName": "杨利测试项目",
+                "buyerName": "杨利",
+                "shipCreateTime": 1476071715000,
+                "goodsArriveTime": 1476079022000,
+                "shipId": "201610101155156668",
+                "totalPrice": 50,
+                "plateNumber": "浙A",
+                "billStatus": "待支付"
+            },
+            {
+                "billId": 47,
+                "planName": "杨利测试项目",
+                "buyerName": "杨利",
+                "shipCreateTime": 1476079146000,
+                "goodsArriveTime": 1476079513000,
+                "shipId": "201610101359065589",
+                "totalPrice": 30,
+                "plateNumber": "浙A",
+                "billStatus": "待支付"
+            }
+        ];
+        var tmpl = $.templates("#billTmpl");
+        var html = tmpl.render(data, {
+            timeFormat: function (time) {
+                return new Date(time).format("yyyy-MM-dd")
+            }
+        });
+        $("#billList").html(html);
+    }
+
+</script>
+</body>
+</html>

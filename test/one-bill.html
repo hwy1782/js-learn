@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- Load jQuery -->
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+
+    <!-- Load JsRender latest version, from www.jsviews.com: -->
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../myJs/myJs.js"></script>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<!-- Provide container for rendered template output: -->
+<div id="result"></div>
+
+<script id="billTmpl" type="text/x-jsrender">
+
+<tr>
+    <td style='display:none' class='shipId'>{{:shipId}}</td>
+    <td class='billId'>{{:billId}}</td>
+    <td><a href='/console/ship/detail/{{:shipId}}'>{{:shipId}}</a></td>
+    <td name='planName'>{{:planName}}</td>
+    <td name='buyerName'>{{:buyerName}}</td>
+    <!--<td>new Date({{:shipCreateTime}}).format("yyyy-MM-dd")</td>-->
+    <td>{{:shipCreateTime}}</td>
+    <td>{{:totalPrice}}</td>
+    <td>{{:plateNumber}}</td>
+    <td>
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm carCheckStatus">{{:billStatus}}</button>
+        <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown"><span
+                class="caret"></span></button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#" name="updateCheckStatus" value="CANCELED">已取消</a></li>
+            <li><a href="#" name="updateCheckStatus" value="TO_BE_PAID">待支付</a></li>
+            <li><a href="#" name="updateCheckStatus" value="PAID">已支付</a></li>
+        </ul>
+    </div>
+    </td>
+    <td> <button  class='btn btn-default btn-sm billDetail'>详情</button></td>
+</tr>
+
+
+</script>
+
+<script>
+    var data = {
+        "billId": 48,
+        "planName": "真如",
+        "buyerName": "肖宗灿",
+        "shipCreateTime": 1476080699000,
+        "goodsArriveTime": 1476085314000,
+        "shipId": "2016101014245948211",
+        "totalPrice": 30,
+        "plateNumber": "浙A",
+        "billStatus": "待支付"
+    };
+    var tmpl = $.templates("#billTmpl");
+    var html = tmpl.render(data);
+    $("#result").html(html);
+</script>
+</body>
+</html>
